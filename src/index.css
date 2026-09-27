@@ -1,0 +1,30 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #F3F1EA;
+  color: #0B1F3F;
+  font-family: 'Barlow', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+}
+
+a {
+  color: #0B1F3F;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #B8860B;
+}
+
+input,
+select,
+textarea {
+  font-family: 'Barlow', sans-serif;
+}

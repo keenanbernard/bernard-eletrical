@@ -1,0 +1,63 @@
+.nav-link {
+  color: #0B1F3F;
+  transition: color 0.15s;
+}
+.nav-link:hover {
+  color: #B8860B;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #D9A21B;
+  color: #0B1F3F;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-primary:hover {
+  background: #0B1F3F;
+  color: #F3F1EA;
+}
+
+.btn-outline {
+  display: inline-block;
+  color: #0B1F3F;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-outline:hover {
+  background: #0B1F3F;
+  color: #F3F1EA;
+}
+
+.btn-phone {
+  background: #0B1F3F;
+  color: #F3F1EA;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-phone:hover {
+  background: #D9A21B;
+  color: #0B1F3F;
+}
+
+.service-item:hover {
+  background: rgba(217, 162, 27, 0.07);
+}
+
+.contact-link:hover {
+  color: #D9A21B !important;
+}
+
+.form-input {
+  transition: border-bottom-color 0.15s;
+}
+.form-input:focus {
+  border-bottom-color: #D9A21B !important;
+  outline: none;
+}
+
+.submit-btn:hover {
+  background: #F3F1EA !important;
+  color: #0B1F3F !important;
+}
+
+.send-another:hover {
+  color: #D9A21B;
+}
