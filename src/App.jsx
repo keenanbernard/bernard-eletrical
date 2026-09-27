@@ -60,7 +60,7 @@ function Hero() {
           <span style={{ color: C.gold }}>the first time.</span>
         </h1>
         <p style={{ margin: 0, fontSize: 'clamp(18px,1.6vw,21px)', lineHeight: 1.55, color: C.muted, maxWidth: 520 }}>
-          Electrical consultation, installation and repair for homes and businesses across Belize. Honest assessments, code-compliant work, and a licensed technician on every job.
+          Electrical consultation, installation and repair for homes and businesses across Belize. Honest assessments, code-compliant work and a licensed technician on every job.
         </p>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <a href="#contact" className="btn-primary" style={{ padding: '18px 28px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 19, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Book a consultation</a>
