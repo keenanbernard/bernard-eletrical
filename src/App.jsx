@@ -313,7 +313,7 @@ function Footer() {
           <span><span style={{ color: C.gold, fontWeight: 700 }}>Committed to safety.</span><br />Focused on solutions.</span>
           <span><span style={{ color: C.gold, fontWeight: 700 }}>Powering today.</span><br />Building tomorrow.</span>
         </div>
-        <span style={{ fontSize: 14, color: '#A9B4C8' }}>© 2026 Bernard's Electrical Solutions · PUC Licence ETII00334</span>
+        <span style={{ fontSize: 14, color: '#A9B4C8' }}>© 2026 Bernard's Electrical Solutions</span>
       </div>
     </footer>
   )
