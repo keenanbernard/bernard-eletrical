@@ -131,7 +131,7 @@ function Services() {
   return (
     <section id="services" style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(64px,8vw,120px) clamp(20px,4vw,48px)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,300px),1fr))', gap: 'clamp(32px,5vw,80px)', alignItems: 'start' }}>
       <div className="services-heading" style={{ display: 'flex', flexDirection: 'column', gap: 20, position: 'sticky', top: 110, maxWidth: 380 }}>
-        <h2 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(40px,5vw,64px)', lineHeight: 0.95, textTransform: 'uppercase', color: C.navy }}>Five services, one licensed technician</h2>
+        <h2 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(40px,5vw,64px)', lineHeight: 0.95, textTransform: 'uppercase', color: C.navy }}>Five services, done right</h2>
         <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: C.muted }}>Not sure what you need? Start with a consultation. We'll inspect, explain the options plainly and quote before any work begins.</p>
       </div>
       <div style={{ gridColumn: 'span 2', minWidth: 0, display: 'flex', flexDirection: 'column', borderTop: `2px solid ${C.navy}` }}>
