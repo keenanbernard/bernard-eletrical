@@ -28,3 +28,11 @@ select,
 textarea {
   font-family: 'Barlow', sans-serif;
 }
+
+h1, h2 {
+  text-wrap: balance;
+}
+
+p {
+  overflow-wrap: break-word;
+}

@@ -3,7 +3,7 @@
   transition: color 0.15s;
 }
 .nav-link:hover {
-  color: #B8860B;
+  color: #8A6A12;
 }
 
 .btn-primary {
@@ -17,14 +17,15 @@
   color: #F3F1EA;
 }
 
-.btn-outline {
+.btn-ghost {
   display: inline-block;
-  color: #0B1F3F;
-  transition: background 0.15s, color 0.15s;
+  color: #1D7A8A;
+  border-bottom: 1px solid #1D7A8A;
+  transition: color 0.15s, border-color 0.15s;
 }
-.btn-outline:hover {
-  background: #0B1F3F;
-  color: #F3F1EA;
+.btn-ghost:hover {
+  color: #0B1F3F;
+  border-color: #0B1F3F;
 }
 
 .btn-phone {
@@ -42,7 +43,15 @@
 }
 
 .contact-link:hover {
+  color: #1D7A8A !important;
+}
+
+.licence-link {
+  transition: color 0.15s, border-color 0.15s;
+}
+.licence-link:hover {
   color: #D9A21B !important;
+  border-color: #F3F1EA !important;
 }
 
 .form-input {
@@ -52,12 +61,122 @@
   border-bottom-color: #D9A21B !important;
   outline: none;
 }
+.form-input::placeholder {
+  color: #4A5D80;
+  opacity: 1;
+}
 
-.submit-btn:hover {
+.submit-btn:not(:disabled):hover {
   background: #F3F1EA !important;
   color: #0B1F3F !important;
 }
 
 .send-another:hover {
   color: #D9A21B;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 0.75s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.form-success {
+  animation: fadeUp 0.35s ease forwards;
+}
+
+/* ── Hamburger button (hidden on desktop) ── */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  color: #0B1F3F;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+/* ── Mobile nav panel (hidden by default everywhere) ── */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #F3F1EA;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(11,31,63,0.08);
+}
+
+/* ── Focus indicators ── */
+/* !important needed: all:unset in inline styles beats external CSS without it */
+.service-item:focus-visible {
+  outline: 2px solid #D9A21B !important;
+  outline-offset: -2px !important;
+}
+.chip-btn:not([aria-pressed="true"]):hover {
+  border-color: #C9D1E0 !important;
+  background: rgba(255,255,255,0.1) !important;
+}
+.chip-btn:focus-visible {
+  outline: 2px solid #F3F1EA !important;
+  outline-offset: 2px !important;
+}
+.submit-btn:not(:disabled):focus-visible {
+  outline: 2px solid #F3F1EA !important;
+  outline-offset: 2px !important;
+}
+.send-another:focus-visible {
+  outline: 2px solid #D9A21B !important;
+  outline-offset: 4px !important;
+}
+.menu-toggle:focus-visible {
+  outline: 2px solid #0B1F3F;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.btn-primary:focus-visible,
+.btn-phone:focus-visible {
+  outline: 2px solid #0B1F3F;
+  outline-offset: 3px;
+}
+.btn-ghost:focus-visible {
+  outline: 2px solid #1D7A8A;
+  outline-offset: 3px;
+}
+.mobile-nav-link:focus-visible {
+  outline: 2px solid #0B1F3F;
+  outline-offset: -2px;
+}
+.contact-link:focus-visible {
+  outline: 2px solid #D9A21B;
+  outline-offset: -2px;
+}
+
+/* ── Responsive breakpoint ── */
+@media (max-width: 767px) {
+  /* Swap desktop nav for hamburger */
+  .header-nav   { display: none !important; }
+  .header-phone { display: none !important; }
+  .menu-toggle  { display: flex; }
+
+  /* Show mobile menu when open */
+  .mobile-menu.is-open { display: flex; }
+
+  /* Hide horizontal step connectors — meaningless in vertical stack */
+  .step-connector { display: none; }
+
+  /* Unstick the services heading — sticky on a stacked layout blocks content */
+  .services-heading { position: static !important; }
 }
