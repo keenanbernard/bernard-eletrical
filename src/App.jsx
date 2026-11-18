@@ -358,7 +358,7 @@ function Contact() {
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>
               Phone
-              <input required name="phone" type="tel" placeholder="631-5325" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%', fontVariantNumeric: 'tabular-nums' }} />
+              <input required name="phone" type="tel" placeholder="501-631-5325" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%', fontVariantNumeric: 'tabular-nums' }} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>
               Email
@@ -465,13 +465,59 @@ function Footer() {
   return (
     <>
       <footer style={{ background: C.navy, color: C.bg, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px clamp(20px,4vw,48px)', display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', gap: 'clamp(24px,5vw,64px)', flexWrap: 'wrap', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 20, textTransform: 'uppercase', letterSpacing: '0.04em', lineHeight: 1.15 }}>
-            <span><span style={{ color: C.gold, fontWeight: 700 }}>Committed to safety.</span><br />Focused on solutions.</span>
-            <span><span style={{ color: C.gold, fontWeight: 700 }}>Powering today.</span><br />Building tomorrow.</span>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(32px,4vw,48px) clamp(20px,4vw,48px) 0' }}>
+          <div className="footer__grid">
+
+            {/* Brand */}
+            <div className="footer__brand">
+              <a href="#" onClick={e => { e.preventDefault(); scrollTo('top') }} style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
+                <img src={logoImg} alt="Bernard's Electrical Solutions" style={{ height: 44, width: 'auto', display: 'block' }} />
+                <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+                  <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 18, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.bg }}>Bernard's</span>
+                  <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 500, fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.gold }}>Electrical Solutions</span>
+                </div>
+              </a>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 24, flexWrap: 'wrap', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 18, textTransform: 'uppercase', letterSpacing: '0.04em', lineHeight: 1.2 }}>
+                <span><span style={{ color: C.gold, fontWeight: 700 }}>Committed to safety.</span><br />Focused on solutions.</span>
+                <span><span style={{ color: C.gold, fontWeight: 700 }}>Powering today.</span><br />Building tomorrow.</span>
+              </div>
+              <div className="footer__social">
+                <a href="https://www.instagram.com/bernardselectrical/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer__social-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Explore */}
+            <div>
+              <h5 className="footer__heading">Explore</h5>
+              <ul className="footer__list">
+                <li><a href="#" onClick={e => { e.preventDefault(); scrollTo('services') }} className="footer__link">Services</a></li>
+                <li><a href="#" onClick={e => { e.preventDefault(); scrollTo('process') }} className="footer__link">How we work</a></li>
+                <li><a href="#" onClick={e => { e.preventDefault(); scrollTo('works') }} className="footer__link">Works</a></li>
+                <li><a href="/about" onClick={e => { e.preventDefault(); navigate('/about') }} className="footer__link">About</a></li>
+                <li><a href="#" onClick={e => { e.preventDefault(); scrollTo('contact') }} className="footer__link">Contact</a></li>
+              </ul>
+            </div>
+
+            {/* Find Us */}
+            <div>
+              <h5 className="footer__heading">Find Us</h5>
+              <ul className="footer__list">
+                <li><a href="https://maps.google.com/?q=15+Barbados+St+Belmopan+Belize" target="_blank" rel="noopener noreferrer" className="footer__link">15 Barbados St., Belmopan</a></li>
+                <li><a href="tel:5016102396" className="footer__link" style={{ fontVariantNumeric: 'tabular-nums' }}>501-610-2396</a></li>
+                <li><a href="mailto:bernardseletricalsolutions@gmail.com" className="footer__link" style={{ wordBreak: 'break-all' }}>bernardseletricalsolutions@gmail.com</a></li>
+              </ul>
+            </div>
+
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-            <span style={{ fontSize: 14, color: C.dim }}>Copyright© 2026 Bernard's Electrical Solutions</span>
+
+          <div className="footer__bottom">
+            <span style={{ fontSize: 13, color: C.dim }}>© {new Date().getFullYear()} Bernard's Electrical Solutions</span>
             <button
               onClick={() => setShowPrivacy(true)}
               style={{ all: 'unset', cursor: 'pointer', fontSize: 13, color: C.dim, borderBottom: '1px solid rgba(169,180,200,0.4)', paddingBottom: 1, letterSpacing: '0.04em' }}

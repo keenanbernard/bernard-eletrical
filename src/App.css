@@ -164,6 +164,66 @@
   outline-offset: -2px;
 }
 
+/* ── Footer ── */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer__social {
+  display: flex;
+  gap: 12px;
+}
+.footer__social-link {
+  color: #A9B4C8;
+  line-height: 0;
+  transition: color 0.2s;
+}
+.footer__social-link:hover {
+  color: #D9A21B;
+}
+.footer__heading {
+  margin: 0 0 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D9A21B;
+}
+.footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer__link {
+  font-size: 15px;
+  color: #A9B4C8;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer__link:hover {
+  color: #F3F1EA;
+}
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(20px, 3vw, 28px) 0;
+}
+
 /* ── Responsive breakpoint ── */
 @media (max-width: 767px) {
   /* Swap desktop nav for hamburger */
@@ -179,4 +239,13 @@
 
   /* Unstick the services heading — sticky on a stacked layout blocks content */
   .services-heading { position: static !important; }
+
+  /* Footer: single column on mobile */
+  .footer__grid { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Footer: brand full-width, three nav cols become 2+1 */
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }
 }
