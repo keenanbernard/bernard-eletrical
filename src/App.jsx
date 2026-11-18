@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import logoImg from './assets/logo.png'
 import panelImg from './assets/New panel.png'
 import './App.css'
@@ -15,6 +16,8 @@ const C = {
   dim: '#A9B4C8',
   border: '#4A5D80',
 }
+
+const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
 const PATHS = {
   phone: 'M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z',
@@ -48,7 +51,7 @@ function Header() {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 10, background: C.bg, borderBottom: '1px solid rgba(11,31,63,0.12)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '12px clamp(20px,4vw,48px)', display: 'flex', alignItems: 'center', gap: 24 }}>
-        <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <a href="#" onClick={e => { e.preventDefault(); scrollTo('top') }} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <img src={logoImg} alt="Bernard's Electrical Solutions crest" style={{ height: 48, width: 'auto', display: 'block' }} />
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
             <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 20, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.navy }}>Bernard's</span>
@@ -56,10 +59,10 @@ function Header() {
           </div>
         </a>
         <nav className="header-nav" aria-label="Primary" style={{ display: 'flex', gap: 28, marginLeft: 'auto', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 16, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          <a href="#services" className="nav-link">Services</a>
-          <a href="#process" className="nav-link">How we work</a>
-          <a href="#about" className="nav-link">About</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('services') }} className="nav-link">Services</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('process') }} className="nav-link">How we work</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('about') }} className="nav-link">About</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact') }} className="nav-link">Contact</a>
         </nav>
         <a href="tel:5016102396" className="header-phone btn-phone" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 18px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: '0.06em', fontVariantNumeric: 'tabular-nums' }}>
           <Icon d={PATHS.phone} size={18} />
@@ -76,10 +79,10 @@ function Header() {
       </div>
       <div className={`mobile-menu${menuOpen ? ' is-open' : ''}`} style={{ padding: '4px clamp(20px,4vw,48px) 24px' }}>
         <nav aria-label="Mobile" style={{ display: 'flex', flexDirection: 'column', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          <a href="#services" className="nav-link mobile-nav-link" onClick={() => setMenuOpen(false)}>Services</a>
-          <a href="#process" className="nav-link mobile-nav-link" onClick={() => setMenuOpen(false)}>How we work</a>
-          <a href="#about" className="nav-link mobile-nav-link" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#contact" className="nav-link mobile-nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('services'); setMenuOpen(false) }} className="nav-link mobile-nav-link">Services</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('process'); setMenuOpen(false) }} className="nav-link mobile-nav-link">How we work</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('about'); setMenuOpen(false) }} className="nav-link mobile-nav-link">About</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact'); setMenuOpen(false) }} className="nav-link mobile-nav-link">Contact</a>
         </nav>
         <a href="tel:5016102396" className="btn-primary"
           onClick={() => setMenuOpen(false)}
@@ -104,8 +107,8 @@ function Hero() {
           Electrical consultation, installation and repair for homes and businesses across Belize. Honest assessments, code-compliant work and a licensed technician on every job.
         </p>
         <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-          <a href="#contact" className="btn-primary" style={{ padding: '20px 36px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 21, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Book a consultation</a>
-          <a href="#services" className="btn-ghost" style={{ padding: '14px 0', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: '0.06em', textTransform: 'uppercase' }}>See services <span aria-hidden="true">→</span></a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact') }} className="btn-primary" style={{ padding: '20px 36px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 21, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Book a consultation</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('services') }} className="btn-ghost" style={{ padding: '14px 0', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: '0.06em', textTransform: 'uppercase' }}>See services <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -396,6 +399,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <Analytics />
     </div>
   )
 }
