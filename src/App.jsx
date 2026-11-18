@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import logoImg from './assets/logo.png'
 import panelImg from './assets/New panel.png'
@@ -373,17 +373,75 @@ function Contact() {
   )
 }
 
-function Footer() {
+function PrivacyModal({ onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
   return (
-    <footer style={{ background: C.navy, color: C.bg, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px clamp(20px,4vw,48px)', display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', gap: 'clamp(24px,5vw,64px)', flexWrap: 'wrap', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 20, textTransform: 'uppercase', letterSpacing: '0.04em', lineHeight: 1.15 }}>
-          <span><span style={{ color: C.gold, fontWeight: 700 }}>Committed to safety.</span><br />Focused on solutions.</span>
-          <span><span style={{ color: C.gold, fontWeight: 700 }}>Powering today.</span><br />Building tomorrow.</span>
-        </div>
-        <span style={{ fontSize: 14, color: C.dim }}>Copyright© 2026 Bernard's Electrical Solutions</span>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Privacy Policy"
+      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(11,31,63,0.72)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 'clamp(16px,4vw,40px)' }}
+    >
+      <div style={{ background: C.bg, color: C.navy, width: '100%', maxWidth: 680, maxHeight: '85vh', overflowY: 'auto', padding: 'clamp(28px,5vw,52px)', position: 'relative' }}>
+        <button
+          onClick={onClose}
+          aria-label="Close privacy policy"
+          style={{ all: 'unset', cursor: 'pointer', position: 'absolute', top: 20, right: 20, color: C.muted, display: 'flex' }}
+        >
+          <Icon d={PATHS.close} size={22} />
+        </button>
+
+        <h2 style={{ margin: '0 0 6px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(32px,5vw,52px)', lineHeight: 1, textTransform: 'uppercase', color: C.navy }}>Privacy Policy</h2>
+        <p style={{ margin: '0 0 28px', fontSize: 13, color: C.muted, letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 600 }}>Last updated November 2026</p>
+
+        {[
+          ['What we collect', 'When you submit the contact form we collect your name, phone number, email address, the service type you select, and any details you write in the message field. We use this information solely to respond to your enquiry.'],
+          ['Analytics', 'We use Vercel Analytics to count page views and understand how visitors navigate the site. This data is anonymous — no names, emails or device identifiers are stored.'],
+          ['Third parties we share data with', 'Contact form submissions are processed by Web3Forms (web3forms.com), whose servers receive and forward your details to us by email. Anonymous analytics data is processed by Vercel, Inc. We do not sell or share your information with any other party.'],
+          ['Retention', 'Form submission data is retained only as long as needed to respond to your enquiry and is then deleted. Analytics data is aggregate and contains no personal information.'],
+          ['Your rights', 'You may request access to, correction of, or deletion of any personal data we hold about you by contacting us at the details below.'],
+          ['Contact', 'Bernard\'s Electrical Solutions · 15 Barbados St., Belmopan, Belize · bernardseletricalsolutions@gmail.com · 501-610-2396'],
+        ].map(([heading, body]) => (
+          <div key={heading} style={{ marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${C.bgDim}` }}>
+            <h3 style={{ margin: '0 0 8px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 20, textTransform: 'uppercase', letterSpacing: '0.06em', color: C.darkGold }}>{heading}</h3>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: C.muted }}>{body}</p>
+          </div>
+        ))}
       </div>
-    </footer>
+    </div>
+  )
+}
+
+function Footer() {
+  const [showPrivacy, setShowPrivacy] = useState(false)
+
+  return (
+    <>
+      <footer style={{ background: C.navy, color: C.bg, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px clamp(20px,4vw,48px)', display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', gap: 'clamp(24px,5vw,64px)', flexWrap: 'wrap', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 20, textTransform: 'uppercase', letterSpacing: '0.04em', lineHeight: 1.15 }}>
+            <span><span style={{ color: C.gold, fontWeight: 700 }}>Committed to safety.</span><br />Focused on solutions.</span>
+            <span><span style={{ color: C.gold, fontWeight: 700 }}>Powering today.</span><br />Building tomorrow.</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+            <span style={{ fontSize: 14, color: C.dim }}>Copyright© 2026 Bernard's Electrical Solutions</span>
+            <button
+              onClick={() => setShowPrivacy(true)}
+              style={{ all: 'unset', cursor: 'pointer', fontSize: 13, color: C.dim, borderBottom: '1px solid rgba(169,180,200,0.4)', paddingBottom: 1, letterSpacing: '0.04em' }}
+            >
+              Privacy Policy
+            </button>
+          </div>
+        </div>
+      </footer>
+      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+    </>
   )
 }
 
