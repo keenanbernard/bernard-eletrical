@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import logoImg from './assets/logo.png'
 import panelImg from './assets/New panel.png'
+import doeImg from './assets/Department of the Environment.png'
+import AboutPage from './AboutPage'
+import { navigate } from './router'
 import './App.css'
 
 const C = {
@@ -61,7 +64,8 @@ function Header() {
         <nav className="header-nav" aria-label="Primary" style={{ display: 'flex', gap: 28, marginLeft: 'auto', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 16, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('services') }} className="nav-link">Services</a>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('process') }} className="nav-link">How we work</a>
-          <a href="#" onClick={e => { e.preventDefault(); scrollTo('about') }} className="nav-link">About</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('works') }} className="nav-link">Works</a>
+          <a href="/about" onClick={e => { e.preventDefault(); navigate('/about') }} className="nav-link">About</a>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact') }} className="nav-link">Contact</a>
         </nav>
         <a href="tel:5016102396" className="header-phone btn-phone" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 18px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 17, letterSpacing: '0.06em', fontVariantNumeric: 'tabular-nums' }}>
@@ -81,7 +85,8 @@ function Header() {
         <nav aria-label="Mobile" style={{ display: 'flex', flexDirection: 'column', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('services'); setMenuOpen(false) }} className="nav-link mobile-nav-link">Services</a>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('process'); setMenuOpen(false) }} className="nav-link mobile-nav-link">How we work</a>
-          <a href="#" onClick={e => { e.preventDefault(); scrollTo('about'); setMenuOpen(false) }} className="nav-link mobile-nav-link">About</a>
+          <a href="#" onClick={e => { e.preventDefault(); scrollTo('works'); setMenuOpen(false) }} className="nav-link mobile-nav-link">Works</a>
+          <a href="/about" onClick={e => { e.preventDefault(); navigate('/about'); setMenuOpen(false) }} className="nav-link mobile-nav-link">About</a>
           <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact'); setMenuOpen(false) }} className="nav-link mobile-nav-link">Contact</a>
         </nav>
         <a href="tel:5016102396" className="btn-primary"
@@ -210,31 +215,67 @@ function Process() {
   )
 }
 
+const WORKS = [
+  {
+    client: 'Department of the Environment',
+    logo: doeImg,
+    scope: 'Inspection, distribution boards, cable lug replacement and bus bar service',
+    period: 'October 2026',
+  },
+]
+
+function RecentWorks() {
+  return (
+    <section id="works" style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(64px,8vw,120px) clamp(20px,4vw,48px)', display: 'flex', flexDirection: 'column', gap: 48 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 24, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <h2 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(40px,5vw,64px)', lineHeight: 0.95, textTransform: 'uppercase', color: C.navy }}>Recent works</h2>
+          <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: C.muted, maxWidth: 460 }}>Clients who've trusted us with their electrical.</p>
+        </div>
+        <a href="#" onClick={e => { e.preventDefault(); scrollTo('contact') }} className="btn-ghost" style={{ padding: '14px 0', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+          Work with us <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(min(100%,320px),1fr))', gap: 'clamp(16px,3vw,32px)' }}>
+        {WORKS.map(({ client, logo, scope, period }) => (
+          <div key={client} style={{ border: `1.5px solid ${C.gold}`, display: 'flex', flexDirection: 'column', gap: 0, overflow: 'hidden' }}>
+            <div style={{ background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(28px,4vw,40px)', minHeight: 160 }}>
+              {logo
+                ? <img src={logo} alt={client} style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain', display: 'block' }} />
+                : <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(18px,2vw,24px)', textTransform: 'uppercase', color: C.navy, textAlign: 'center', lineHeight: 1.1 }}>{client}</span>
+              }
+            </div>
+            <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 10, borderTop: `1.5px solid ${C.gold}` }}>
+              {logo && <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 20, lineHeight: 1.1, textTransform: 'uppercase', color: C.navy }}>{client}</span>}
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                {scope && <span style={{ fontSize: 13, fontWeight: 600, padding: '5px 10px', background: C.navy, color: C.bg, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{scope}</span>}
+                <span style={{ fontSize: 13, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.darkGold, fontWeight: 600 }}>{period}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function About() {
   return (
-    <section id="about" style={{ position: 'relative', background: C.navy, color: C.bg, overflow: 'hidden' }}>
-      <div style={{ position: 'relative', maxWidth: 1280, margin: '0 auto', padding: 'clamp(64px,8vw,112px) clamp(20px,4vw,48px)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,380px),1fr))', gap: 'clamp(40px,6vw,96px)', alignItems: 'center' }}>
-        <div style={{ position: 'relative', height: 'clamp(340px,44vw,560px)', overflow: 'hidden' }}>
-          <img src={panelImg} alt="Electrical panel installation" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          <div style={{ position: 'absolute', inset: 0, border: `4px solid ${C.gold}`, pointerEvents: 'none' }} />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560 }}>
+    <section id="about" style={{ background: C.navy, color: C.bg }}>
+      <div style={{ maxWidth: 720, margin: '0 auto', padding: 'clamp(56px,7vw,96px) clamp(20px,4vw,48px)', display: 'flex', flexDirection: 'column', gap: 28 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <h2 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(48px,6vw,80px)', lineHeight: 0.9, textTransform: 'uppercase', color: C.bg }}>
             Renan<br /><span style={{ color: C.gold }}>Bernard</span>
           </h2>
-          <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 22, letterSpacing: '0.08em', textTransform: 'uppercase', paddingBottom: 18, borderBottom: `2px solid ${C.gold}` }}>Electrical Technician II</span>
-          <p style={{ margin: 0, fontSize: 18, lineHeight: 1.6, color: C.light }}>Bernard's Electrical Solutions is a Belmopan-based practice built on one idea: electrical work should be done safely, explained clearly and built to last. Every job is carried out under a Public Utilities Commission licence.</p>
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', paddingTop: 4 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <span style={{ fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.gold, fontWeight: 600 }}>PUC Licence</span>
-              <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" className="licence-link" style={{ fontFamily: 'ui-monospace,"Courier New",monospace', fontWeight: 700, fontSize: 24, letterSpacing: '0.04em', color: C.bg, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1 }}>ETII00334</a>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <span style={{ fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.gold, fontWeight: 600 }}>Based in</span>
-              <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 26, letterSpacing: '0.04em', color: C.bg }}>Belmopan, Belize</span>
-            </div>
-          </div>
+          <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.dim }}>Electrical Technician II · <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" style={{ color: C.bg, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1, fontFamily: 'ui-monospace,"Courier New",monospace', letterSpacing: '0.04em' }}>ETII00334</a></span>
         </div>
+        <p style={{ margin: 0, fontSize: 18, lineHeight: 1.6, color: C.light, maxWidth: 540 }}>
+          A Belmopan-based practice built on one idea: electrical work should be done safely, explained clearly, and built to last.
+        </p>
+        <a href="/about" onClick={e => { e.preventDefault(); navigate('/about') }} style={{ alignSelf: 'flex-start', display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 18, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.gold, borderBottom: `2px solid ${C.gold}`, paddingBottom: 2, textDecoration: 'none' }}>
+          Full profile <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   )
@@ -260,7 +301,7 @@ function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: "New consultation request — Bernard's Electrical",
+          subject: "New consultation request: Bernard's Electrical",
           from_name: "Bernard's Electrical Website",
           name: e.target.name.value.trim(),
           phone: e.target.phone.value.trim(),
@@ -313,15 +354,15 @@ function Contact() {
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
 <label style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>
               Name
-              <input required name="name" placeholder="e.g. Maria Lopez" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%' }} />
+              <input required name="name" placeholder="Isabella Richards" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%' }} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>
               Phone
-              <input required name="phone" type="tel" placeholder="e.g. 501 610 0000" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%', fontVariantNumeric: 'tabular-nums' }} />
+              <input required name="phone" type="tel" placeholder="631-5325" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%', fontVariantNumeric: 'tabular-nums' }} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>
               Email
-              <input required name="email" type="email" placeholder="e.g. you@example.com" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%' }} />
+              <input required name="email" type="email" placeholder="irichards@gmail.com" className="form-input" style={{ background: 'transparent', border: 0, borderBottom: `2px solid ${C.border}`, color: C.bg, fontSize: 18, padding: '10px 0', letterSpacing: 0, textTransform: 'none', width: '100%' }} />
             </label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <span style={{ fontSize: 13, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, color: C.gold }}>What do you need?</span>
@@ -402,7 +443,7 @@ function PrivacyModal({ onClose }) {
 
         {[
           ['What we collect', 'When you submit the contact form we collect your name, phone number, email address, the service type you select, and any details you write in the message field. We use this information solely to respond to your enquiry.'],
-          ['Analytics', 'We use Vercel Analytics to count page views and understand how visitors navigate the site. This data is anonymous — no names, emails or device identifiers are stored.'],
+          ['Analytics', 'We use Vercel Analytics to count page views and understand how visitors navigate the site. This data is anonymous. No names, emails or device identifiers are stored.'],
           ['Third parties we share data with', 'Contact form submissions are processed by Web3Forms (web3forms.com), whose servers receive and forward your details to us by email. Anonymous analytics data is processed by Vercel, Inc. We do not sell or share your information with any other party.'],
           ['Retention', 'Form submission data is retained only as long as needed to respond to your enquiry and is then deleted. Analytics data is aggregate and contains no personal information.'],
           ['Your rights', 'You may request access to, correction of, or deletion of any personal data we hold about you by contacting us at the details below.'],
@@ -446,6 +487,22 @@ function Footer() {
 }
 
 export default function App() {
+  const [page, setPage] = useState(() =>
+    window.location.pathname === '/about' ? 'about' : 'home'
+  )
+
+  useEffect(() => {
+    const handler = () => setPage(window.location.pathname === '/about' ? 'about' : 'home')
+    window.addEventListener('routechange', handler)
+    window.addEventListener('popstate', handler)
+    return () => {
+      window.removeEventListener('routechange', handler)
+      window.removeEventListener('popstate', handler)
+    }
+  }, [])
+
+  if (page === 'about') return <><AboutPage /><Analytics /></>
+
   return (
     <div style={{ minHeight: '100vh', background: C.bg, overflowX: 'hidden' }}>
       <Header />
@@ -453,6 +510,7 @@ export default function App() {
         <Hero />
         <Services />
         <Process />
+        <RecentWorks />
         <About />
         <Contact />
       </main>
