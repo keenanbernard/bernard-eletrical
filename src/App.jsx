@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import logoImg from './assets/logo.png'
 import panelImg from './assets/New panel.png'
@@ -78,7 +78,10 @@ function Header() {
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
-          <Icon d={menuOpen ? PATHS.close : PATHS.menu} size={24} />
+          <span className={`icon-swap${menuOpen ? ' icon-swap--open' : ''}`}>
+              <span className="icon-swap__icon icon-swap__icon--menu"><Icon d={PATHS.menu} size={24} /></span>
+              <span className="icon-swap__icon icon-swap__icon--close"><Icon d={PATHS.close} size={24} /></span>
+            </span>
         </button>
       </div>
       <div className={`mobile-menu${menuOpen ? ' is-open' : ''}`} style={{ padding: '4px clamp(20px,4vw,48px) 24px' }}>
@@ -160,7 +163,7 @@ function Services() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 'clamp(26px,3vw,36px)', lineHeight: 1, textTransform: 'uppercase', color: C.navy }}>{name}</span>
                 <span style={{ fontSize: 17, lineHeight: 1.5, color: C.muted, maxWidth: 560 }}>{desc}</span>
-                <div id={`service-panel-${i}`} style={{ display: 'grid', gridTemplateRows: isOpen ? '1fr' : '0fr', transition: 'grid-template-rows 0.25s ease' }}>
+                <div id={`service-panel-${i}`} style={{ display: 'grid', gridTemplateRows: isOpen ? '1fr' : '0fr', transition: `grid-template-rows ${isOpen ? '0.25s' : '0.2s'} ease-in-out` }}>
                   <div style={{ overflow: 'hidden' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, paddingTop: 8, paddingBottom: 2 }}>
                       {jobs.map(j => (
@@ -170,7 +173,7 @@ function Services() {
                   </div>
                 </div>
               </div>
-              <span style={{ display: 'inline-flex', color: C.navy, transition: 'transform 0.25s ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0, marginTop: 6 }}>
+              <span style={{ display: 'inline-flex', color: C.navy, transition: `transform ${isOpen ? '0.25s' : '0.2s'} ease-in-out`, transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0, marginTop: 6 }}>
                 <Icon d={PATHS.chevron} size={20} />
               </span>
             </button>
@@ -415,23 +418,30 @@ function Contact() {
 }
 
 function PrivacyModal({ onClose }) {
+  const [animOut, setAnimOut] = useState(false)
+
+  const close = useCallback(() => {
+    setAnimOut(true)
+    setTimeout(onClose, 200)
+  }, [onClose])
+
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    const handler = (e) => { if (e.key === 'Escape') close() }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
-  }, [onClose])
+  }, [close])
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Privacy Policy"
-      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      onClick={e => { if (e.target === e.currentTarget) close() }}
       style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(11,31,63,0.72)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 'clamp(16px,4vw,40px)' }}
     >
-      <div style={{ background: C.bg, color: C.navy, width: '100%', maxWidth: 680, maxHeight: '85vh', overflowY: 'auto', padding: 'clamp(28px,5vw,52px)', position: 'relative' }}>
+      <div className={`modal-panel${animOut ? ' modal-panel--closing' : ''}`} style={{ background: C.bg, color: C.navy, width: '100%', maxWidth: 680, maxHeight: '85vh', overflowY: 'auto', padding: 'clamp(28px,5vw,52px)', position: 'relative' }}>
         <button
-          onClick={onClose}
+          onClick={close}
           aria-label="Close privacy policy"
           style={{ all: 'unset', cursor: 'pointer', position: 'absolute', top: 20, right: 20, color: C.muted, display: 'flex' }}
         >

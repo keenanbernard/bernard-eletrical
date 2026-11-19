@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import logoImg from './assets/logo.png'
 import doeImg from './assets/Department of the Environment.png'
+import renanImg from './assets/Renan.png'
 import { navigate } from './router'
 
 const C = {
@@ -67,7 +68,10 @@ function Header() {
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         >
-          <Icon d={menuOpen ? PATHS.close : PATHS.menu} size={24} />
+          <span className={`icon-swap${menuOpen ? ' icon-swap--open' : ''}`}>
+              <span className="icon-swap__icon icon-swap__icon--menu"><Icon d={PATHS.menu} size={24} /></span>
+              <span className="icon-swap__icon icon-swap__icon--close"><Icon d={PATHS.close} size={24} /></span>
+            </span>
         </button>
       </div>
       <div className={`mobile-menu${menuOpen ? ' is-open' : ''}`} style={{ padding: '4px clamp(20px,4vw,48px) 24px' }}>
@@ -109,9 +113,16 @@ export default function AboutPage() {
           <a href="/" onClick={goHome} style={{ alignSelf: 'flex-start', fontSize: 14, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.muted, textDecoration: 'none', fontFamily: "'Barlow Condensed',sans-serif" }}>
             ← Home
           </a>
-          <h1 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(56px,8vw,96px)', lineHeight: 0.88, textTransform: 'uppercase', color: C.navy }}>
-            Renan<br /><span style={{ color: C.gold }}>Bernard</span>
-          </h1>
+          <div style={{ display: 'flex', gap: 'clamp(24px,5vw,56px)', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+            <h1 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(56px,8vw,96px)', lineHeight: 0.88, textTransform: 'uppercase', color: C.navy }}>
+              Renan<br /><span style={{ color: C.gold }}>Bernard</span>
+            </h1>
+            <img
+              src={renanImg}
+              alt="Renan Bernard"
+              style={{ width: 'clamp(140px,20vw,220px)', height: 'clamp(175px,25vw,275px)', objectFit: 'cover', objectPosition: 'center 30%', display: 'block', flexShrink: 0 }}
+            />
+          </div>
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginTop: 8 }}>
             <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.muted }}>Electrical Technician II</span>
             <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'ui-monospace,"Courier New",monospace', fontWeight: 700, fontSize: 20, letterSpacing: '0.04em', color: C.navy, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1 }}>ETII00334</a>
@@ -170,11 +181,18 @@ export default function AboutPage() {
 }
 
 function PrivacyModal({ onClose }) {
+  const [animOut, setAnimOut] = useState(false)
+
+  const close = useCallback(() => {
+    setAnimOut(true)
+    setTimeout(onClose, 200)
+  }, [onClose])
+
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    const handler = (e) => { if (e.key === 'Escape') close() }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
-  }, [onClose])
+  }, [close])
 
   const CLOSE_PATH = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'
 
@@ -183,12 +201,12 @@ function PrivacyModal({ onClose }) {
       role="dialog"
       aria-modal="true"
       aria-label="Privacy Policy"
-      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      onClick={e => { if (e.target === e.currentTarget) close() }}
       style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(11,31,63,0.72)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', padding: 'clamp(16px,4vw,40px)' }}
     >
-      <div style={{ background: C.bg, color: C.navy, width: '100%', maxWidth: 680, maxHeight: '85vh', overflowY: 'auto', padding: 'clamp(28px,5vw,52px)', position: 'relative' }}>
+      <div className={`modal-panel${animOut ? ' modal-panel--closing' : ''}`} style={{ background: C.bg, color: C.navy, width: '100%', maxWidth: 680, maxHeight: '85vh', overflowY: 'auto', padding: 'clamp(28px,5vw,52px)', position: 'relative' }}>
         <button
-          onClick={onClose}
+          onClick={close}
           aria-label="Close privacy policy"
           style={{ all: 'unset', cursor: 'pointer', position: 'absolute', top: 20, right: 20, color: C.muted, display: 'flex' }}
         >

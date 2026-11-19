@@ -10,11 +10,15 @@
   display: inline-block;
   background: #D9A21B;
   color: #0B1F3F;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.12s ease-out;
 }
 .btn-primary:hover {
   background: #0B1F3F;
   color: #F3F1EA;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  transition: background 0.15s, color 0.15s, transform 0s;
 }
 
 .btn-ghost {
@@ -31,11 +35,15 @@
 .btn-phone {
   background: #0B1F3F;
   color: #F3F1EA;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.12s ease-out;
 }
 .btn-phone:hover {
   background: #D9A21B;
   color: #0B1F3F;
+}
+.btn-phone:active {
+  transform: scale(0.97);
+  transition: background 0.15s, color 0.15s, transform 0s;
 }
 
 .service-item:hover {
@@ -70,6 +78,10 @@
   background: #F3F1EA !important;
   color: #0B1F3F !important;
 }
+.submit-btn:not(:disabled):active {
+  transform: scale(0.97);
+  transition: background 0.2s, color 0.2s, transform 0s !important;
+}
 
 .send-another:hover {
   color: #D9A21B;
@@ -88,8 +100,31 @@
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes successPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes modalOut {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to   { opacity: 0; transform: scale(0.95) translateY(12px); }
+}
+@keyframes menuSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .form-success {
-  animation: fadeUp 0.35s ease forwards;
+  animation: fadeUp 0.35s ease-out forwards, successPulse 0.4s ease-in-out 0.35s forwards;
+}
+.modal-panel {
+  animation: modalIn 0.25s ease-out forwards;
+}
+.modal-panel--closing {
+  animation: modalOut 0.2s ease-in forwards;
 }
 
 /* ── Hamburger button (hidden on desktop) ── */
@@ -118,6 +153,24 @@
   padding: 14px 0;
   border-bottom: 1px solid rgba(11,31,63,0.08);
 }
+
+/* ── Icon crossfade (hamburger ↔ close) ── */
+.icon-swap {
+  position: relative;
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+}
+.icon-swap__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  transition: opacity 0.15s ease-out, filter 0.15s ease-out;
+}
+.icon-swap__icon--menu  { opacity: 1; filter: blur(0); }
+.icon-swap__icon--close { opacity: 0; filter: blur(4px); }
+.icon-swap--open .icon-swap__icon--menu  { opacity: 0; filter: blur(4px); }
+.icon-swap--open .icon-swap__icon--close { opacity: 1; filter: blur(0); }
 
 /* ── Focus indicators ── */
 /* !important needed: all:unset in inline styles beats external CSS without it */
@@ -232,7 +285,7 @@
   .menu-toggle  { display: flex; }
 
   /* Show mobile menu when open */
-  .mobile-menu.is-open { display: flex; }
+  .mobile-menu.is-open { display: flex; animation: menuSlideDown 0.2s ease-out forwards; }
 
   /* Hide horizontal step connectors — meaningless in vertical stack */
   .step-connector { display: none; }
