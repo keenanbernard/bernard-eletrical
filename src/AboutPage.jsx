@@ -132,22 +132,22 @@ export default function AboutPage() {
 
         <Section label="Mission">
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.7, color: C.muted }}>
-            We will provide safe, code-compliant electrical work for every home and business in Belize. We will start every job with an honest inspection, explain options in plain language, and commit to a written price before a single wire is touched. We will not cut corners on safety or leave a client without a full walkthrough of the completed work.
+            We will provide safe, code-compliant electrical work for every home and business in Belize. We will start every job with an honest inspection, explain options in plain language, commit to a written price before a single wire is touched. We will not cut corners on safety or leave a client without a full walkthrough of the completed work.
           </p>
         </Section>
 
         <Section label="Vision">
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.7, color: C.muted }}>
-            To be the most trusted name in electrical services in Belize. Known for work that is done right the first time, explained clearly, and built to outlast its warranty. We are building a practice that future clients, and future electricians, can be proud of.
+            To be the most trusted name in electrical services in Belize. Known for work that is done right the first time, explained clearly, built to outlast its warranty. We are building a practice that future clients, future electricians, can be proud of.
           </p>
         </Section>
 
         <Section label="About the Practice">
           <p style={{ margin: 0, fontSize: 18, lineHeight: 1.7, color: C.muted }}>
-            Bernard's Electrical Solutions is a Belmopan-based practice serving residential and commercial clients throughout Belize. Services cover new wiring, panel upgrades, commercial fit-outs, scheduled maintenance, safety compliance assessments, and fault finding. All work is carried out under Public Utilities Commission licence ETII00334, issued to Renan Bernard as an Electrical Technician II.
+            Bernard's Electrical Solutions is a Belmopan-based practice serving residential and commercial clients throughout Belize. Services cover new wiring, panel upgrades, commercial fit-outs, scheduled maintenance, safety compliance assessments, fault finding. All work is carried out under Public Utilities Commission licence ETII00334, issued to Renan Bernard as an Electrical Technician II.
           </p>
           <p style={{ margin: '16px 0 0', fontSize: 18, lineHeight: 1.7, color: C.muted }}>
-            The practice is committed to transparent pricing, code-compliant workmanship, and clear communication. No work begins without client approval of a written quote. Every completed job is tested and walked through with the client before sign-off.
+            The practice is committed to transparent pricing, code-compliant workmanship, clear communication. No work begins without client approval of a written quote. Every completed job is tested and walked through with the client before sign-off.
           </p>
         </Section>
 
@@ -215,7 +215,7 @@ function PrivacyModal({ onClose }) {
         <h2 style={{ margin: '0 0 6px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(32px,5vw,52px)', lineHeight: 1, textTransform: 'uppercase', color: C.navy }}>Privacy Policy</h2>
         <p style={{ margin: '0 0 28px', fontSize: 13, color: C.muted, letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 600 }}>Last updated November 2026</p>
         {[
-          ['What we collect', 'When you submit the contact form we collect your name, phone number, email address, the service type you select, and any details you write in the message field. We use this information solely to respond to your enquiry.'],
+          ['What we collect', 'When you submit the contact form we collect your name, phone number, email address, the service type you select, any details you write in the message field. We use this information solely to respond to your enquiry.'],
           ['Analytics', 'We use Vercel Analytics to count page views and understand how visitors navigate the site. This data is anonymous. No names, emails or device identifiers are stored.'],
           ['Third parties we share data with', 'Contact form submissions are processed by Web3Forms (web3forms.com), whose servers receive and forward your details to us by email. Anonymous analytics data is processed by Vercel, Inc. We do not sell or share your information with any other party.'],
           ['Retention', 'Form submission data is retained only as long as needed to respond to your enquiry and is then deleted. Analytics data is aggregate and contains no personal information.'],
