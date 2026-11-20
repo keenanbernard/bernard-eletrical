@@ -271,7 +271,7 @@ function About() {
           <h2 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(48px,6vw,80px)', lineHeight: 0.9, textTransform: 'uppercase', color: C.bg }}>
             Renan<br /><span style={{ color: C.gold }}>Bernard</span>
           </h2>
-          <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.dim }}>Electrical Technician II · <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" style={{ color: C.bg, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1, fontFamily: 'ui-monospace,"Courier New",monospace', letterSpacing: '0.04em' }}>ETII00334</a></span>
+          <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.08em', textTransform: 'uppercase', color: C.dim }}>Electrical Technician II · <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" title="Verify licence on the PUC wireman registry" style={{ color: C.bg, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1, fontFamily: 'ui-monospace,"Courier New",monospace', letterSpacing: '0.04em' }}>ETII00334</a></span>
         </div>
         <p style={{ margin: 0, fontSize: 18, lineHeight: 1.6, color: C.light, maxWidth: 540 }}>
           A Belmopan-based practice built on one idea: electrical work should be done safely, explained clearly, built to last.

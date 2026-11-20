@@ -125,7 +125,7 @@ export default function AboutPage() {
           </div>
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginTop: 8 }}>
             <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.muted }}>Electrical Technician II</span>
-            <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'ui-monospace,"Courier New",monospace', fontWeight: 700, fontSize: 20, letterSpacing: '0.04em', color: C.navy, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1 }}>ETII00334</a>
+            <a href="https://wireman.puc.bz/wireman/page/6?search=" target="_blank" rel="noopener noreferrer" title="Verify licence on the PUC wireman registry" style={{ fontFamily: 'ui-monospace,"Courier New",monospace', fontWeight: 700, fontSize: 20, letterSpacing: '0.04em', color: C.navy, borderBottom: `1px solid ${C.gold}`, paddingBottom: 1 }}>ETII00334</a>
             <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 20, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.muted }}>Belmopan, Belize</span>
           </div>
         </div>
