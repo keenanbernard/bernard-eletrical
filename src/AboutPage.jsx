@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
-import logoImg from './assets/logo.png'
-import doeImg from './assets/Department of the Environment.png'
-import renanImg from './assets/Renan.png'
+import logoImg from './assets/logo.webp'
+import doeImg from './assets/doe.webp'
+import renanImg from './assets/renan.webp'
 import { navigate } from './router'
 
 const C = {

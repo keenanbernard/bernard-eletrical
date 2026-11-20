@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Analytics } from '@vercel/analytics/react'
-import logoImg from './assets/logo.png'
-import panelImg from './assets/New panel.png'
-import doeImg from './assets/Department of the Environment.png'
+import logoImg from './assets/logo.webp'
+import panelImg from './assets/panel-new.webp'
+import doeImg from './assets/doe.webp'
 import AboutPage from './AboutPage'
 import { navigate } from './router'
 import './App.css'
@@ -109,7 +109,7 @@ function Hero() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 620 }}>
         <h1 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(56px,8.4vw,120px)', lineHeight: 0.88, letterSpacing: '-0.005em', textTransform: 'uppercase', color: C.navy }}>
           Wired right<br />
-          <span style={{ color: C.gold }}>the first time.</span>
+          <span style={{ color: C.darkGold }}>the first time.</span>
         </h1>
         <p style={{ margin: 0, fontSize: 'clamp(18px,1.6vw,21px)', lineHeight: 1.55, color: C.muted, maxWidth: 520 }}>
           Electrical consultation, installation and repair for homes and businesses across Belize. Honest assessments, code-compliant work and a licensed technician on every job.
@@ -542,13 +542,43 @@ function Footer() {
   )
 }
 
-export default function App() {
-  const [page, setPage] = useState(() =>
-    window.location.pathname === '/about' ? 'about' : 'home'
+function NotFound() {
+  return (
+    <div style={{ minHeight: '100vh', background: C.bg, display: 'flex', flexDirection: 'column' }}>
+      <header style={{ background: C.bg, borderBottom: '1px solid rgba(11,31,63,0.12)', padding: '12px clamp(20px,4vw,48px)' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
+          <img src={logoImg} alt="Bernard's Electrical Solutions crest" style={{ height: 48, width: 'auto' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+            <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 20, letterSpacing: '0.06em', textTransform: 'uppercase', color: C.navy }}>Bernard's</span>
+            <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 500, fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: C.darkGold }}>Electrical Solutions</span>
+          </div>
+        </a>
+      </header>
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 'clamp(48px,8vw,96px) clamp(20px,4vw,48px)', textAlign: 'center', gap: 32 }}>
+        <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 'clamp(20px,2.5vw,28px)', letterSpacing: '0.16em', textTransform: 'uppercase', color: C.darkGold }}>404</span>
+        <h1 style={{ margin: 0, fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: 'clamp(48px,7vw,96px)', lineHeight: 0.9, textTransform: 'uppercase', color: C.navy }}>Page not<br />found.</h1>
+        <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55, color: C.muted, maxWidth: 400 }}>This page doesn't exist. Head back home or give us a call.</p>
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <a href="/" className="btn-primary" style={{ padding: '18px 32px', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 700, fontSize: 19, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Back to home</a>
+          <a href="tel:5016102396" className="btn-ghost" style={{ padding: '14px 0', fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 600, fontSize: 17, letterSpacing: '0.06em', textTransform: 'uppercase', fontVariantNumeric: 'tabular-nums' }}>501-610-2396 <span aria-hidden="true">→</span></a>
+        </div>
+      </main>
+    </div>
   )
+}
+
+function getPage() {
+  const p = window.location.pathname
+  if (p === '/' || p === '') return 'home'
+  if (p === '/about') return 'about'
+  return 'notfound'
+}
+
+export default function App() {
+  const [page, setPage] = useState(getPage)
 
   useEffect(() => {
-    const handler = () => setPage(window.location.pathname === '/about' ? 'about' : 'home')
+    const handler = () => setPage(getPage())
     window.addEventListener('routechange', handler)
     window.addEventListener('popstate', handler)
     return () => {
@@ -558,6 +588,7 @@ export default function App() {
   }, [])
 
   if (page === 'about') return <><AboutPage /><Analytics /></>
+  if (page === 'notfound') return <><NotFound /><Analytics /></>
 
   return (
     <div style={{ minHeight: '100vh', background: C.bg, overflowX: 'hidden' }}>
